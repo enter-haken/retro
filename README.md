@@ -1,6 +1,6 @@
 # Retro
 
-These are the source for [retro.hake.one][1]
+These are the sources for [retro.hake.one][1]
 
 ## try it for free
 
