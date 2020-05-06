@@ -1,0 +1,82 @@
+<section class="section" *ngIf="sessionService.session$ | async as session">
+  <!--
+    <div class="columns has-text-centered">
+    <div class="column">
+    <img src="assets/adsense/misc_horizontal/adsense_468x60.png">
+    </div>
+    <div class="column">
+    <img src="assets/adsense/misc_horizontal/adsense_468x60.png">
+    </div>
+    </div>
+  -->
+  <div class="columns" >
+    <div class="column is-one-fifth">
+      <app-entry-list
+         title="What whould you like to start with? (You can use markdown if you like)"
+         (entryAdded)="addEntry($event)"
+         (entryDeleted)="deleteEntry($event)"
+         (entryChanged)="changeEntry($event)"
+         [entries]="session.entries"
+         kind="start">
+      </app-entry-list>
+    </div>
+
+    <div class="column is-one-fifth">
+      <app-entry-list
+         title="What to you want to stop? (You can use markdown if you like)"
+         (entryAdded)="addEntry($event)"
+         (entryDeleted)="deleteEntry($event)"
+         (entryChanged)="changeEntry($event)"
+         [entries]="session.entries"
+         kind="stop">
+      </app-entry-list>
+    </div>
+
+    <div class="column is-one-fifth">
+      <app-entry-list
+         title="What do you like to continue? (You can use markdown if you like)"
+         (entryAdded)="addEntry($event)"
+         (entryDeleted)="deleteEntry($event)"
+         (entryChanged)="changeEntry($event)"
+         [entries]="session.entries"
+         kind="continue">
+      </app-entry-list>
+    </div>
+
+    <div class="column is-one-fifth">
+      <app-entry-list
+         title="What would you like less of? (You can use markdown if you like)"
+         (entryAdded)="addEntry($event)"
+         (entryDeleted)="deleteEntry($event)"
+         (entryChanged)="changeEntry($event)"
+         [entries]="session.entries"
+         kind="less_of">
+      </app-entry-list>
+    </div>
+
+    <div class="column is-one-fifth">
+      <app-entry-list
+         title="What would you like more of? (You can use markdown if you like)"
+         (entryAdded)="addEntry($event)"
+         (entryDeleted)="deleteEntry($event)"
+         (entryChanged)="changeEntry($event)"
+         [entries]="session.entries"
+         kind="more_of">
+      </app-entry-list>
+    </div>
+  </div>
+
+  <!--
+    <div class="columns has-text-centered" >
+    <div class="column">
+    <img src="assets/adsense/recomended/adsense_336x280.png">
+    </div>
+    <div class="column">
+    <img src="assets/adsense/recomended/adsense_336x280.png">
+    </div>
+    <div class="column">
+    <img src="assets/adsense/recomended/adsense_336x280.png">
+    </div>
+    </div>
+  -->
+</section>

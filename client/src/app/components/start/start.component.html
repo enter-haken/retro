@@ -1,0 +1,186 @@
+<section class="hero is-small is-info is-bold">
+  <div class="hero-body">
+    <div class="container has-text-centered">
+      <h1 class="title is-family-monospace is-size-1 is-bold">
+        Retro
+      </h1>
+      <div class="field has-addons has-addons-centered">
+        <div class="control">
+          <button type="button" class="button is-primary is-large" (click)="startSession()" >
+            <span class="icon is-medium is-left">
+              <i class="fas fa-users"></i>
+            </span>
+            <span>
+              Create session
+            </span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="hero is-small is-light is-bold">
+  <div class="hero-body">
+    <div class="container has-text-centered">
+      <h1 class="title is-family-monospace is-size-4">
+        or
+      </h1>
+    </div>
+  </div>
+</section>
+
+<section class="hero is-small is-primary is-bold">
+  <div class="hero-body">
+    <div class="container has-text-centered">
+      <form #enterSessionForm="ngForm" (ngSubmit)="enterSession(enterSessionForm)">
+        <div class="field has-addons has-addons-centered">
+          <div class="control">
+            <input class="input is-large has-text-primary is-expanded" type="text" name="session" placeholder="Got a session id?" required ngModel />
+          </div>
+        </div>
+
+        <div class="field has-addons has-addons-centered">
+          <div class="control">
+            <button type="submit" #enterSessionButton class="button is-info is-large" [disabled]="!enterSessionForm.valid">
+              <span class="icon is-medium is-left">
+                <i class="fas fa-user-plus"></i>
+              </span>
+              <span>
+                Enter session
+              </span>
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!--
+<section class="hero is-small is-light is-bold">
+  <div class="hero-body">
+    <div class="container has-text-centered">
+      <h1 class="title is-family-monospace is-size-4">
+        you can expect 
+      </h1>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="columns">
+    <div class="column is-two-fifths">
+      <figure class="image">
+        <img class="has-ratio" src="/assets/invite.png" alt="Placeholder image">
+      </figure>
+    </div>
+
+    <div class="column">
+      Send your session id to colegues and friends.
+    </div>
+  </div>
+
+  <div class="columns">
+    <div class="column">
+      <figure class="image">
+        <img src="/assets/leave.png" alt="Placeholder image">
+      </figure>
+    </div>
+    <div class="column">
+      Leave when ever you like.
+    </div>
+  </div>
+
+  <div class="columns">
+    <div class="column">
+      <figure class="image">
+        <img src="/assets/add_content.png" alt="Placeholder image">
+      </figure>
+    </div>
+    <div class="column">
+      Simply adding content...
+    </div>
+  </div>
+
+  <div class="columns">
+    <div class="column">
+      <figure class="image">
+        <img src="/assets/add_content_with_markdown.png" alt="Placeholder image">
+      </figure>
+    </div>
+    <div class="column">
+      ... even with markdown.
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="content">
+    <div class="columns has-text-centered" >
+      <div class="column">
+        <img src="assets/adsense/recomended/adsense_336x280.png">
+      </div>
+      <div class="column">
+        <img src="assets/adsense/recomended/adsense_336x280.png">
+      </div>
+      <div class="column">
+        <img src="assets/adsense/recomended/adsense_336x280.png">
+      </div>
+    </div>
+  </div>
+</section>
+-->
+
+
+<div [class.is-active]="invalidSessionIdModalIsActive" class="modal">
+  <div class="modal-background"></div>
+  <div class="modal-content">
+    <header class="modal-card-head has-text-centered">
+      <p class="modal-card-title">Entering your session</p> 
+    </header>
+    <section class="modal-card-body has-text-centered">
+      <p>
+      I am sorry, but I did not find your <strong>session id</strong>.
+      </p>
+      <p>
+      Either your your have provided a wrong <strong>session id</strong>,<br>
+      or your <strong>session</strong> is is not valid any more.
+      </p>
+
+    </section>
+    <footer class="modal-card-foot">
+      <button class="button" (click)="toggleInvalidSessionIdModalIsActive()">Close</button>
+    </footer>
+  </div>
+</div>
+
+<div [class.is-active]="cookieAgreementTokenNotFoundIsActive" class="modal">
+  <div class="modal-background"></div>
+  <div class="modal-content">
+    <header class="modal-card-head has-text-centered">
+      <p class="modal-card-title">Setting Cookies</p>
+    </header>
+    <section class="modal-card-body has-text-centered">
+      <p>
+      Thank you for using <strong>retro</strong>.
+      </p>
+      <p>
+      For <strong>retro</strong> to work, cookies must be set.
+      <strong>retro</strong> stores information about the session in a JWT placed in the local storage.
+      <!--other ones can be set by advertisments, placed by google.-->
+      </p>
+      <p>
+       Ýou can revoke this permission at any time. 
+      </p>
+      <p>
+      If you need more information, you can take a look at my <a [routerLink]="['/privacy']">privacy statement</a>
+      </p>
+
+    </section>
+    <footer class="modal-card-foot">
+      <button class="button" (click)="aggreeToSetCookies()">Allow cookies</button>
+      <button class="button" (click)="toggleCookieAgreementTokenNotFoundIsActive()">Cancel</button>
+    </footer>
+  </div>
+</div>

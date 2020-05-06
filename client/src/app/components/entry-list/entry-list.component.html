@@ -1,0 +1,11 @@
+<app-entry mode="shouldBeEditable" (hasCreationCandidate)="createEntry($event)" [placeholder]="title"></app-entry>
+
+<div *ngIf="(entries | filter:kind) as filterResult">
+  <app-entry *ngFor="let entry of filterResult"
+           mode="shouldBeVisible"
+           [entry]="entry"
+           (hasDeletionCandidate)="deleteEntry($event)"
+           (hasChangeCandidate)="changeEntry($event)">
+  </app-entry>
+
+</div>

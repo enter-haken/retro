@@ -1,0 +1,6 @@
+{
+  "/api/*": {
+    "target": "http://hake.one:4040",
+    "secure": false
+  }
+}

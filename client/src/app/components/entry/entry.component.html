@@ -1,0 +1,56 @@
+<div class="card" *ngIf="!shouldShowEditor">
+  <div class="card-content">
+    <p class="subtitle is-6 has-text-right">{{entry.participant.name}}</p>
+    <div class="content" [innerHtml]="entry.markdown">
+    </div>
+  </div>
+
+  <footer class="card-footer" *ngIf="canModify">
+    <button class="card-footer-item button is-success" (click)="toggleMode()">
+      <span class="icon is-small">
+        <i class="fas fa-check"></i>
+      </span>
+      <span>Edit</span>
+    </button>
+    <button class="card-footer-item button is-danger is-outlined" (click)="deleteEntry()">
+      <span>Delete</span>
+      <span class="icon is-small">
+        <i class="fas fa-times"></i>
+      </span>
+    </button>
+  </footer>
+</div>
+
+<div class="card" *ngIf="shouldShowEditor">
+  <form #entryForm="ngForm" (ngSubmit)="submit(entryForm)">
+    <div class="card-content">
+      <div class="control">
+        <textarea class="textarea is-primary" name="text" [placeholder]="placeholder" rows="3" [(ngModel)]="content" required></textarea>
+      </div>
+    </div>
+
+    <footer *ngIf="isEmpty" class="card-footer">
+      <button type="submit" class="card-footer-item button is-success" [disabled]="!entryForm.valid">
+        <span class="icon is-small">
+          <i class="fas fa-check"></i>
+        </span>
+        <span>Contribute</span>
+      </button>
+    </footer>
+
+    <footer *ngIf="isNotEmpty" class="card-footer">
+      <button type="submit" class="card-footer-item button is-success" [disabled]="!entryForm.valid">
+        <span class="icon is-small">
+          <i class="fas fa-check"></i>
+        </span>
+        <span>Contribute</span>
+      </button>
+      <button class="card-footer-item button" (click)="toggleMode()">
+        <span class="icon is-small">
+          <i class="fas fa-check"></i>
+        </span>
+        <span>Cancel</span>
+      </button>
+    </footer>
+  </form>
+</div>

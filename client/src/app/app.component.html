@@ -1,0 +1,93 @@
+<router-outlet (activate)="scrollToTheTop($event)"></router-outlet>
+
+<footer class="footer is-primary">
+  <div class="columns has-text-centered is-centered" *ngIf="isLoggedIn">
+    <div class="column is-info" *ngIf="isCreator">
+      <div class="field has-addons has-addons-centered">
+        <div class="control">
+          <input class="input" type="text" value="{{sessionId}}" #sessionIdReadOnlyField readonly>
+        </div>
+        <div class="control">
+          <button class="button is-primary"
+                  (click)="copyToClipboard(sessionIdReadOnlyField)">
+            <span class="icon is-small">
+              <i class="fas fa-clipboard"></i>
+            </span>
+            <span>
+              Give your session id to a friend
+            </span>
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class="column buttons">
+      <button (click)="toggleModal()" class="button is-primary">
+        <span class="icon is-small">
+          <i class="fas fa-user-cog"></i>
+        </span>
+        <span>
+          If you like, state your name
+        </span>
+      </button>
+
+      <button (click)="leave()" class="button is-primary">
+        <span class="icon is-small">
+          <i class="fas fa-sign-out-alt"></i>
+        </span>
+        <span>
+          Leave retro session
+        </span>
+      </button>
+
+      <button (click)="removeLocalData()" class="button is-primary">
+        <span class="icon is-small">
+          <i class="fas fa-cookie"></i>
+        </span>
+        <span>
+          Delete all cookies, and leave
+        </span>
+      </button>
+
+    </div>
+  </div>
+
+  <div class="content has-text-centered">
+    created by Jan Frederik Hake |
+    <a [routerLink]="['/privacy']">privacy</a> |
+    <a href="http://hake.one/about.html">about</a> |
+    <a href="http://hake.one/career.html">work experience</a> |
+    <a href="http://hake.one/blog">blog</a>
+  </div>
+</footer>
+
+<div [class.is-active]="modalIsActive" class="modal">
+  <div class="modal-background"></div>
+  <div class="modal-content">
+    <header class="modal-card-head has-text-centered">
+      <p class="modal-card-title">State your name</p>
+    </header>
+    <section class="modal-card-body">
+      <div class="content has-text-centered">
+        <p>
+        Your name is displayed on the upper right corner of every card you have created.
+        "anonymous" is shown per default.
+        </p>
+        <p>
+        If you like to see your name there, you can enter it here.
+        </p>
+      </div>
+
+      <div class="control has-icons-left">
+        <input #nameInput class="input" type="text" placeholder="What is your name?">
+        <span class="icon is-small is-left">
+          <i class="fas fa-signature"></i>
+        </span>
+      </div>
+
+    </section>
+    <footer class="modal-card-foot">
+      <button class="button" (click)="updateParticipant(nameInput)">Save</button>
+      <button class="button" (click)="toggleModal()">Cancel</button>
+    </footer>
+  </div>
+</div>

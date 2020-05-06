@@ -1,0 +1,4 @@
+./deps/
+./_build
+./client/dist
+./client/node_modules/
