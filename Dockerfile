@@ -37,7 +37,7 @@ WORKDIR /app
 
 COPY --from=backend_builder /app/_build/prod/rel/retro .
 
-EXPOSE 5050 
+EXPOSE 4050 
 
 CMD ["bin/retro", "start"]
 
