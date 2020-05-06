@@ -1,5 +1,11 @@
 <div class="card" *ngIf="!shouldShowEditor">
   <div class="card-content">
+    <p class="subtitle is-6 has-text-left points">
+      <span class="icon is-small" (click)="vote()">
+        <i class="fas fa-thumbs-up"></i>
+      </span>
+      {{entry.votes}}
+    </p>
     <p class="subtitle is-6 has-text-right">{{entry.participant.name}}</p>
     <div class="content" [innerHtml]="entry.markdown">
     </div>

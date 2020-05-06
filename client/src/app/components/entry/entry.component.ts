@@ -22,6 +22,7 @@ export class EntryComponent implements OnInit {
   @Output() hasCreationCandidate = new EventEmitter<Entry>();
   @Output() hasChangeCandidate = new EventEmitter<Entry>();
   @Output() hasDeletionCandidate = new EventEmitter<Entry>();
+  @Output() hasVoteCandidate = new EventEmitter<Entry>();
 
   public canModify: boolean;
 
@@ -43,11 +44,16 @@ export class EntryComponent implements OnInit {
 
     if (this.entry) {
       this.content = this.entry.text;
-    } 
+    }
   }
 
   public toggleMode() {
     this.shouldShowEditor = !this.shouldShowEditor;
+  }
+
+  public vote() {
+    this.entry.votes += 1;
+    this.hasVoteCandidate.emit(this.entry);
   }
 
   public submit(form: NgForm) {

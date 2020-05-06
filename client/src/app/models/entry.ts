@@ -6,5 +6,6 @@ export class Entry {
   markdown: string;
   entryKind: string;
   participant: Participant;
+  votes: number;
 }
 

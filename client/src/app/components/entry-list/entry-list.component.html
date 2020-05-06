@@ -5,6 +5,7 @@
            mode="shouldBeVisible"
            [entry]="entry"
            (hasDeletionCandidate)="deleteEntry($event)"
+           (hasVoteCandidate)="voteOnEntry($event)"
            (hasChangeCandidate)="changeEntry($event)">
   </app-entry>
 
