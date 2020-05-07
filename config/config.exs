@@ -5,11 +5,10 @@ config :retro,
 
 config :retro, Retro.Token,
   issuer: "retro",
-  secret_key: "YN04NIKumaN/HSkTZWzPHVFLBCveZgusFGOm31+aGLe073IJSELxAK2DMVEo3UwT"
+  secret_key: 64 |> :crypto.strong_rand_bytes() |> Base.encode64() |> binary_part(0,64)
 
 config :sse,
   # Keep alive in milliseconds
-  #keep_alive: {:system, "SSE_KEEP_ALIVE_IN_MS", 2 * 60 * 60 * 1000 }
   keep_alive: 1000 
 
 import_config "config.#{Mix.env()}.exs"
