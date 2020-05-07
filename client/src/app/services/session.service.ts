@@ -40,7 +40,7 @@ export class SessionService {
 
       //const eventSource = new EventSource(`http://hake.one:5050/api/hasChanges/${this.tokenService.getSessionId()}`);
       const eventSource = new EventSource(this.getEventSourceUrl(), {
-        withCredentials: true 
+        withCredentials: true
       });
 
       eventSource.onmessage = x => {
@@ -72,7 +72,7 @@ export class SessionService {
   private getEventSourceUrl = () => {
     if (isDevMode) {
       return environment.apiUrl + `/api/hasChanges/${this.tokenService.getSessionId()}`;
-    } 
+    }
 
     return `/api/hasChanges/${this.tokenService.getSessionId()}`
   }
@@ -136,6 +136,11 @@ export class SessionService {
       err => console.log("could not update entry", err)
     );
 
+  voteOnEntry = (entry: Entry) =>
+    this.http.put<Response<Entry>>(`/api/session/participant/entry/${entry.id}/vote`, {}).subscribe(
+      () => console.log("entry has been voted on"),
+      err => console.log("could not vote on entry", err)
+    );
 
   deleteEntry = (entry: Entry) =>
     this.http.delete<Response<string>>(`/api/session/participant/entry/${entry.id}`)

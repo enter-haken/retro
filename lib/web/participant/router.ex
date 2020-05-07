@@ -127,6 +127,20 @@ defmodule Retro.Web.Participant.Router do
     end
   end
 
+  put "/entry/:entry_id/vote" do
+    %Session{id: session_id} = conn.assigns[:session]
+
+    case SessionWorker.vote_entry(session_id, entry_id) do
+      {:ok, _} ->
+        conn
+        |> notify_session_has_updated()
+        |> send_resp(200, :ok |> to_response())
+
+      _ ->
+        conn |> send_resp(404, "could not vote on entry #{entry_id}" |> to_response())
+    end
+  end
+
   defp notify_session_has_updated(conn) do
     conn.assigns[:session]
     |> Session.needs_update()

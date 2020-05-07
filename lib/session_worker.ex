@@ -93,6 +93,15 @@ defmodule Retro.SessionWorker do
      |> Session.active()}
   end
 
+  def handle_call(
+        {:vote, :entry, id_to_vote_on},
+        _from,
+        %Session{entries: entries} = state
+      ) do
+    {:reply, state,
+     %Session{state | entries: Entry.vote(entries, id_to_vote_on)} |> Session.active()}
+  end
+
   def terminate(reason, %Session{id: id, entries: entries, participants: participants}) do
     Logger.info(
       "SessionWorker terminates for #{id} with #{length(entries)} entries and #{
@@ -155,6 +164,11 @@ defmodule Retro.SessionWorker do
   def update_entry(session_id, entry) do
     session_id
     |> call({:update, :entry, entry})
+  end
+
+  def vote_entry(session_id, entry_id) do
+    session_id
+    |> call({:vote, :entry, entry_id})
   end
 
   def delete_entry(session_id, entry_id),

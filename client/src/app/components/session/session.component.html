@@ -16,6 +16,7 @@
          (entryAdded)="addEntry($event)"
          (entryDeleted)="deleteEntry($event)"
          (entryChanged)="changeEntry($event)"
+         (entryVotedOn)="voteOnEntry($event)"
          [entries]="session.entries"
          kind="start">
       </app-entry-list>
@@ -27,6 +28,7 @@
          (entryAdded)="addEntry($event)"
          (entryDeleted)="deleteEntry($event)"
          (entryChanged)="changeEntry($event)"
+         (entryVotedOn)="voteOnEntry($event)"
          [entries]="session.entries"
          kind="stop">
       </app-entry-list>
@@ -38,6 +40,7 @@
          (entryAdded)="addEntry($event)"
          (entryDeleted)="deleteEntry($event)"
          (entryChanged)="changeEntry($event)"
+         (entryVotedOn)="voteOnEntry($event)"
          [entries]="session.entries"
          kind="continue">
       </app-entry-list>
@@ -49,6 +52,7 @@
          (entryAdded)="addEntry($event)"
          (entryDeleted)="deleteEntry($event)"
          (entryChanged)="changeEntry($event)"
+         (entryVotedOn)="voteOnEntry($event)"
          [entries]="session.entries"
          kind="less_of">
       </app-entry-list>
@@ -60,6 +64,7 @@
          (entryAdded)="addEntry($event)"
          (entryDeleted)="deleteEntry($event)"
          (entryChanged)="changeEntry($event)"
+         (entryVotedOn)="voteOnEntry($event)"
          [entries]="session.entries"
          kind="more_of">
       </app-entry-list>

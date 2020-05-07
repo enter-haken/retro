@@ -48,4 +48,8 @@ export class SessionComponent implements OnInit {
   deleteEntry(entryToDelete: Entry) {
     this.sessionService.deleteEntry(entryToDelete);
   }
+
+  voteOnEntry(entryToVoteOn: Entry) {
+    this.sessionService.voteOnEntry(entryToVoteOn);
+  }
 }

@@ -20,8 +20,8 @@ export class EntryListComponent {
 
   @Output() entryAdded = new EventEmitter<Entry>();
   @Output() entryChanged = new EventEmitter<Entry>();
-  @Output() entryDeleted  = new EventEmitter<Entry>();
-  
+  @Output() entryDeleted = new EventEmitter<Entry>();
+  @Output() entryVotedOn = new EventEmitter<Entry>();
 
   constructor() { }
 
@@ -33,6 +33,10 @@ export class EntryListComponent {
 
   public changeEntry(entry: Entry) {
     this.entryChanged.emit(entry);
+  }
+
+  public voteOnEntry(entry: Entry) {
+    this.entryVotedOn.emit(entry);
   }
 
   public deleteEntry(entry: Entry) {

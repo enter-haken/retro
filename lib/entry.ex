@@ -8,21 +8,24 @@ defmodule Retro.Entry do
           text: String.t(),
           markdown: String.t(),
           entry_kind: entry_kind(),
-          participant: Retro.Participant.t()
+          participant: Retro.Participant.t(),
+          votes: Integer.t()
         }
 
   defstruct id: nil,
             text: nil,
             markdown: nil,
             entry_kind: nil,
-            participant: nil
+            participant: nil,
+            votes: 0
 
   def create(text, entry_kind, participant) do
     %Entry{
       id: UUID.uuid4(),
       text: text,
       entry_kind: entry_kind,
-      participant: participant
+      participant: participant,
+      votes: 0
     }
     |> get_markdown()
   end
@@ -32,14 +35,16 @@ defmodule Retro.Entry do
         text: text,
         markdown: markdown,
         entry_kind: entry_kind,
-        participant: participant
+        participant: participant,
+        votes: votes
       }),
       do: %{
         id: id,
         text: text,
         markdown: markdown,
         entryKind: entry_kind,
-        participant: Participant.get(participant)
+        participant: Participant.get(participant),
+        votes: votes,
       }
 
   def update(nil, _entry), do: nil
@@ -53,6 +58,23 @@ defmodule Retro.Entry do
         cond do
           id == id_to_update ->
             %Entry{current_entry | text: text}
+            |> get_markdown()
+
+          true ->
+            current_entry
+        end
+
+      acc ++ [entry]
+    end)
+  end
+
+  def vote(entries, id_to_update) do
+    entries
+    |> Enum.reduce([], fn %Entry{id: id} = current_entry, acc ->
+      entry =
+        cond do
+          id == id_to_update ->
+            %Entry{current_entry | votes: current_entry.votes + 1}
             |> get_markdown()
 
           true ->
