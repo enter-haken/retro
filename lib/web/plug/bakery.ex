@@ -1,6 +1,6 @@
 defmodule Retro.Web.Plug.Bakery.Fetch do
   defmacro get_files() do
-    static_files = Path.wildcard("client/dist/Retro/**/*.{css,js,ico,html,png,jpg,gz,br}")
+    static_files = Path.wildcard("client/dist/Retro/**/*.{css,js,ico,html,png,jpg,webmanifest}")
 
     static =
       static_files
