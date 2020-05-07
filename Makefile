@@ -3,6 +3,8 @@ TAG := $$(git log -1 --pretty=%H)
 IMG := ${NAME}:${TAG}
 LATEST := ${NAME}:latest
 
+DOCKERHUB_TARGET := enterhaken/retro:latest
+
 .PHONY: default
 default: build
 
@@ -61,6 +63,11 @@ docker_run:
 		--name retro \
 		-d \
 		-t ${LATEST} 
+
+.PHONY: docker_push
+docker_push:
+	docker tag ${LATEST} ${DOCKERHUB_TARGET}
+	docker push ${DOCKERHUB_TARGET}
 	
 .PHONY: update
 update: docker
