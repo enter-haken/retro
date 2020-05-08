@@ -43,7 +43,7 @@ $ make docker run \
 ### requirements
 
 * Elixir ~ 1.9
-* Angular CLI ~ 8.x
+* Angular CLI ~ 9.x
 
 To start `retro` locally, you can
 
