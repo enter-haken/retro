@@ -22,7 +22,7 @@ export class StartComponent {
   @ViewChild('enterSessionButton', { static: true }) enterSessionButton: ElementRef<HTMLElement>; 
 
   constructor(
-    private sessionService: SessionService,
+    public sessionService: SessionService,
     private tokenService: TokenService,
     private router: Router
   ) {
@@ -31,6 +31,7 @@ export class StartComponent {
     }
 
     this.shouldShowAdds = !isDevMode();
+    this.sessionService.getSystem();
   }
 
   startSession() {

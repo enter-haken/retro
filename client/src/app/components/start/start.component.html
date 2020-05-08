@@ -57,6 +57,16 @@
   </div>
 </section>
 
+<section class="hero is-small is-light is-bold" *ngIf="sessionService.system$ | async as system">
+  <div class="hero-body">
+    <div class="container has-text-centered">
+      <h1 class="title is-family-monospace is-size-4">
+        There are {{system.count}} active retro sessions
+      </h1>
+    </div>
+  </div>
+</section>
+
 <section class="section" *ngIf="shouldShowAdds">
   <div class="content">
     <div class="columns has-text-centered" >

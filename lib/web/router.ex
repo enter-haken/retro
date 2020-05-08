@@ -60,6 +60,11 @@ defmodule Retro.Web.Router do
     end
   end
 
+  get "/api/system" do
+    conn
+    |> send_resp(200, %{count: Retro.SessionSupervisor.count()} |> to_response())
+  end
+
   get "/api/hasChanges/:session_id" do
     topic = session_id |> String.to_atom()
 

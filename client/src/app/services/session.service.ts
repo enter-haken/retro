@@ -10,12 +10,12 @@ import { JwtHelperService } from '@auth0/angular-jwt';
 import { TokenService } from './token.service';
 
 import { Session } from '../models/session';
+import { System } from '../models/system';
 import { Entry } from '../models/entry';
 import { Authentication } from '../models/authentication';
 import { Response } from '../models/response';
 
 import { environment } from '../../environments/environment';
-
 
 @Injectable({
   providedIn: 'root'
@@ -23,8 +23,11 @@ import { environment } from '../../environments/environment';
 export class SessionService {
 
   private session: BehaviorSubject<Session> = new BehaviorSubject<Session>(null);
+  private system: BehaviorSubject<System> = new BehaviorSubject<System>(null);
+
 
   session$ = this.session.asObservable();
+  system$ = this.system.asObservable();
 
   constructor(
     private http: HttpClient,
@@ -82,6 +85,13 @@ export class SessionService {
       .subscribe(
         data => this.session.next(data.result),
         err => console.log("could not get session", err)
+      );
+
+  getSystem = () =>
+    this.http.get<Response<System>>(`/api/system`)
+      .subscribe(
+        data => this.system.next(data.result),
+        err => console.log("could not get system data", err)
       );
 
   createSession = () =>

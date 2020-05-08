@@ -48,8 +48,14 @@ defmodule Retro.SessionSupervisor do
     end
   end
 
+  def count() do
+    Supervisor.which_children(__MODULE__)
+    |> Kernel.length()
+  end
+
   defp any?(id) do
     Supervisor.which_children(__MODULE__)
     |> Enum.any?(fn {session_id, _, _, _} -> session_id == id end)
   end
+
 end
