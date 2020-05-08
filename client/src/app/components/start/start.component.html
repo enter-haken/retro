@@ -57,87 +57,21 @@
   </div>
 </section>
 
-<!--
-<section class="hero is-small is-light is-bold">
-  <div class="hero-body">
-    <div class="container has-text-centered">
-      <h1 class="title is-family-monospace is-size-4">
-        you can expect 
-      </h1>
-    </div>
-  </div>
-</section>
-
-<section class="section">
-  <div class="columns">
-    <div class="column is-two-fifths">
-      <figure class="image">
-        <img class="has-ratio" src="/assets/invite.png" alt="Placeholder image">
-      </figure>
-    </div>
-
-    <div class="column">
-      Send your session id to colegues and friends.
-    </div>
-  </div>
-
-  <div class="columns">
-    <div class="column">
-      <figure class="image">
-        <img src="/assets/leave.png" alt="Placeholder image">
-      </figure>
-    </div>
-    <div class="column">
-      Leave when ever you like.
-    </div>
-  </div>
-
-  <div class="columns">
-    <div class="column">
-      <figure class="image">
-        <img src="/assets/add_content.png" alt="Placeholder image">
-      </figure>
-    </div>
-    <div class="column">
-      Simply adding content...
-    </div>
-  </div>
-
-  <div class="columns">
-    <div class="column">
-      <figure class="image">
-        <img src="/assets/add_content_with_markdown.png" alt="Placeholder image">
-      </figure>
-    </div>
-    <div class="column">
-      ... even with markdown.
-    </div>
-  </div>
-</section>
-
-<section class="section">
+<section class="section" *ngIf="shouldShowAdds">
   <div class="content">
     <div class="columns has-text-centered" >
       <div class="column">
-        <img src="assets/adsense/recomended/adsense_336x280.png">
-      </div>
-      <div class="column">
-        <img src="assets/adsense/recomended/adsense_336x280.png">
-      </div>
-      <div class="column">
-        <img src="assets/adsense/recomended/adsense_336x280.png">
+        <iframe src="https://rcm-eu.amazon-adsystem.com/e/cm?o=3&p=48&l=ez&f=ifr&linkID=58050e082cadb12c68fa81bef4a8794b&t=enterhaken-21&tracking_id=enterhaken-21" width="728" height="90" scrolling="no" border="0" marginwidth="0" style="border:none;" frameborder="0"></iframe>
       </div>
     </div>
   </div>
 </section>
--->
-
 
 <div [class.is-active]="invalidSessionIdModalIsActive" class="modal">
   <div class="modal-background"></div>
   <div class="modal-content">
     <header class="modal-card-head has-text-centered">
-      <p class="modal-card-title">Entering your session</p> 
+      <p class="modal-card-title">Entering your session</p>
     </header>
     <section class="modal-card-body has-text-centered">
       <p>
@@ -171,7 +105,7 @@
       <!--other ones can be set by advertisments, placed by google.-->
       </p>
       <p>
-       Ýou can revoke this permission at any time. 
+      Ýou can revoke this permission at any time.
       </p>
       <p>
       If you need more information, you can take a look at my <a [routerLink]="['/privacy']">privacy statement</a>

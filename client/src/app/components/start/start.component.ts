@@ -1,4 +1,4 @@
-import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
+import { Component, OnInit, ElementRef, ViewChild, isDevMode } from '@angular/core';
 
 import { Router } from '@angular/router';
 import { NgForm } from '@angular/forms';
@@ -17,6 +17,7 @@ export class StartComponent {
   cookieAgreementTokenNotFoundIsActive: boolean;
   commingFromCreateSession: boolean;
 
+  shouldShowAdds: boolean;
 
   @ViewChild('enterSessionButton', { static: true }) enterSessionButton: ElementRef<HTMLElement>; 
 
@@ -28,6 +29,8 @@ export class StartComponent {
     if (this.tokenService.hasToken()) {
       this.router.navigate(['session'])
     }
+
+    this.shouldShowAdds = !isDevMode();
   }
 
   startSession() {
