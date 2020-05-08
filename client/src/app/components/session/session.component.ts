@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, isDevMode } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { SessionService } from '../../services/session.service';
@@ -18,14 +18,12 @@ import { Entry } from '../../models/entry';
 export class SessionComponent implements OnInit {
 
   public isCreator: boolean;
-  public shouldShowAdds: boolean;
 
   constructor(
     private router: Router,
     public  sessionService: SessionService,
     private tokenService: TokenService
   ) {
-    this.shouldShowAdds = !isDevMode(); 
   }
 
   ngOnInit() {
