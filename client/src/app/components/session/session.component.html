@@ -1,14 +1,4 @@
 <section class="section" *ngIf="sessionService.session$ | async as session">
-  <!--
-    <div class="columns has-text-centered">
-    <div class="column">
-    <img src="assets/adsense/misc_horizontal/adsense_468x60.png">
-    </div>
-    <div class="column">
-    <img src="assets/adsense/misc_horizontal/adsense_468x60.png">
-    </div>
-    </div>
-  -->
   <div class="columns" >
     <div class="column is-one-fifth">
       <app-entry-list
@@ -20,9 +10,6 @@
          [entries]="session.entries"
          kind="start">
       </app-entry-list>
-    <span *ngIf="shouldShowAdds">
-      <iframe src="https://rcm-eu.amazon-adsystem.com/e/cm?o=3&p=42&l=ez&f=ifr&linkID=676e3a0a22236dc902298c06037130bd&t=enterhaken-21&tracking_id=enterhaken-21" width="234" height="60" scrolling="no" border="0" marginwidth="0" style="border:none;" frameborder="0"></iframe>
-    </span>
     </div>
 
     <div class="column is-one-fifth">
@@ -35,9 +22,6 @@
          [entries]="session.entries"
          kind="stop">
       </app-entry-list>
-      <span *ngIf="shouldShowAdds">
-        <iframe src="https://rcm-eu.amazon-adsystem.com/e/cm?o=3&p=42&l=ez&f=ifr&linkID=676e3a0a22236dc902298c06037130bd&t=enterhaken-21&tracking_id=enterhaken-21" width="234" height="60" scrolling="no" border="0" marginwidth="0" style="border:none;" frameborder="0"></iframe>
-      </span>
     </div>
 
     <div class="column is-one-fifth">
@@ -50,9 +34,6 @@
          [entries]="session.entries"
          kind="continue">
       </app-entry-list>
-      <span *ngIf="shouldShowAdds">
-        <iframe src="https://rcm-eu.amazon-adsystem.com/e/cm?o=3&p=42&l=ez&f=ifr&linkID=676e3a0a22236dc902298c06037130bd&t=enterhaken-21&tracking_id=enterhaken-21" width="234" height="60" scrolling="no" border="0" marginwidth="0" style="border:none;" frameborder="0"></iframe>
-      </span>
     </div>
 
     <div class="column is-one-fifth">
@@ -65,9 +46,6 @@
          [entries]="session.entries"
          kind="less_of">
       </app-entry-list>
-      <span *ngIf="shouldShowAdds">
-        <iframe src="https://rcm-eu.amazon-adsystem.com/e/cm?o=3&p=42&l=ez&f=ifr&linkID=676e3a0a22236dc902298c06037130bd&t=enterhaken-21&tracking_id=enterhaken-21" width="234" height="60" scrolling="no" border="0" marginwidth="0" style="border:none;" frameborder="0"></iframe>
-      </span>
     </div>
 
     <div class="column is-one-fifth">
@@ -80,9 +58,16 @@
          [entries]="session.entries"
          kind="more_of">
       </app-entry-list>
-      <span *ngIf="shouldShowAdds">
-        <iframe src="https://rcm-eu.amazon-adsystem.com/e/cm?o=3&p=42&l=ez&f=ifr&linkID=676e3a0a22236dc902298c06037130bd&t=enterhaken-21&tracking_id=enterhaken-21" width="234" height="60" scrolling="no" border="0" marginwidth="0" style="border:none;" frameborder="0"></iframe>
-      </span>
+    </div>
+  </div>
+</section>
+
+<section class="section" *ngIf="shouldShowAdds">
+  <div class="content">
+    <div class="columns has-text-centered" >
+      <div class="column">
+        <iframe src="https://rcm-eu.amazon-adsystem.com/e/cm?o=3&p=48&l=ez&f=ifr&linkID=58050e082cadb12c68fa81bef4a8794b&t=enterhaken-21&tracking_id=enterhaken-21" width="728" height="90" scrolling="no" border="0" marginwidth="0" style="border:none;" frameborder="0"></iframe>
+      </div>
     </div>
   </div>
 </section>
