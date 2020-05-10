@@ -17,7 +17,8 @@ export class AppComponent implements OnInit {
 
   public sessionId: string;
 
-  public modalIsActive: boolean;
+  public modalStateYourNameIsActive: boolean;
+  public modalLeaveIsActive: boolean;
 
   constructor(
     private sessionService: SessionService,
@@ -37,27 +38,35 @@ export class AppComponent implements OnInit {
     });
   }
 
+  toggleStateYourNameModal() {
+    this.modalStateYourNameIsActive = !this.modalStateYourNameIsActive;
+  }
+
+  toggleLeaveModal() {
+    this.modalLeaveIsActive = !this.modalLeaveIsActive; 
+  }
+
   leave() {
-    this.sessionService.deleteParticpant()
+    this.sessionService.deleteParticpant();
+    this.modalLeaveIsActive = false;
   }
 
   scrollToTheTop(event) {
     window.scroll(0,0);
   }
 
-  toggleModal() {
-    this.modalIsActive = !this.modalIsActive; 
-  }
-
   updateParticipant(nameField) {
     this.sessionService.updateParticipant(nameField.value);
 
-    this.modalIsActive = false;
+    this.modalStateYourNameIsActive = false;
   }
 
   removeLocalData() {
     this.tokenService.revokePermissionToSetCookies();
-    this.tokenService.logout();
+    this.sessionService.deleteParticpant()
+
+    this.modalLeaveIsActive = false;
+
     this.router.navigate(['start']);
   }
 

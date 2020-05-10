@@ -4,7 +4,7 @@ defmodule Retro.Web.Participant.Router do
 
   require Logger
 
-  alias Retro.{Session, Entry, Participant, SessionWorker}
+  alias Retro.{Session, Entry, Participant, SessionWorker, SessionSupervisor}
 
   plug(Retro.Web.Participant.Pipeline)
 
@@ -57,15 +57,27 @@ defmodule Retro.Web.Participant.Router do
   end
 
   delete "/" do
-    %Session{id: session_id} = conn.assigns[:session]
-    %Participant{id: participant_id} = conn.assigns[:user]
+    %Session{id: session_id} = session = conn.assigns[:session]
+    %Participant{id: participant_id, is_creator: is_creator} = conn.assigns[:user]
 
-    case SessionWorker.delete_participant(session_id, participant_id) do
-      {:ok, _} ->
-        conn |> send_resp(200, :ok |> to_response())
+    if is_creator do
+      case SessionSupervisor.delete(session) do
+        {:ok, _} ->
+          conn |> send_resp(200, :ok |> to_response())
 
-      _ ->
-        conn |> send_resp(404, "could not delete participant #{participant_id}" |> to_response())
+        _ ->
+          conn
+          |> send_resp(404, "could not delete session #{session_id}" |> to_response())
+      end
+    else
+      case SessionWorker.delete_participant(session_id, participant_id) do
+        {:ok, _} ->
+          conn |> send_resp(200, :ok |> to_response())
+
+        _ ->
+          conn
+          |> send_resp(404, "could not delete participant #{participant_id}" |> to_response())
+      end
     end
   end
 

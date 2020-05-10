@@ -21,7 +21,7 @@
       </div>
     </div>
     <div class="column buttons">
-      <button (click)="toggleModal()" class="button is-primary">
+      <button (click)="toggleStateYourNameModal()" class="button is-primary">
         <span class="icon is-small">
           <i class="fas fa-user-cog"></i>
         </span>
@@ -30,7 +30,7 @@
         </span>
       </button>
 
-      <button (click)="leave()" class="button is-primary">
+      <button (click)="toggleLeaveModal()" class="button is-primary">
         <span class="icon is-small">
           <i class="fas fa-sign-out-alt"></i>
         </span>
@@ -38,16 +38,6 @@
           Leave retro session
         </span>
       </button>
-
-      <button (click)="removeLocalData()" class="button is-primary">
-        <span class="icon is-small">
-          <i class="fas fa-cookie"></i>
-        </span>
-        <span>
-          Delete all cookies, and leave
-        </span>
-      </button>
-
     </div>
   </div>
 
@@ -56,11 +46,11 @@
     <a [routerLink]="['/privacy']">privacy</a> |
     <a href="http://hake.one">hake.one</a> |
     <a href="https://github.com/enter-haken/retro">sources</a> |
-    <a href="http://hake.one/about.html">about</a> 
+    <a href="http://hake.one/about.html">about</a>
   </div>
 </footer>
 
-<div [class.is-active]="modalIsActive" class="modal">
+<div [class.is-active]="modalStateYourNameIsActive" class="modal">
   <div class="modal-background"></div>
   <div class="modal-content">
     <header class="modal-card-head has-text-centered">
@@ -87,7 +77,35 @@
     </section>
     <footer class="modal-card-foot">
       <button class="button" (click)="updateParticipant(nameInput)">Save</button>
-      <button class="button" (click)="toggleModal()">Cancel</button>
+      <button class="button" (click)="toggleStateYourNameModal()">Cancel</button>
+    </footer>
+  </div>
+</div>
+
+<div [class.is-active]="modalLeaveIsActive" class="modal">
+  <div class="modal-background"></div>
+  <div class="modal-content">
+    <header class="modal-card-head has-text-centered">
+      <p class="modal-card-title">Leave retro session</p>
+    </header>
+    <section class="modal-card-body">
+      <div class="content has-text-centered">
+        <p>
+        Your work is done, and now you want to leave retro?
+        </p>
+        <p *ngIf="isCreator">
+        You are the creator of this retro session.
+        When you leave, all session data will be deleted.
+        </p>
+        <p *ngIf="!isCreator">
+        Your contributions will remain until the session ends.
+        </p>
+      </div>
+    </section>
+    <footer class="modal-card-foot">
+      <button class="button" (click)="leave()">Leave</button>
+      <button class="button" (click)="removeLocalData()">Delete all cookies, and leave</button>
+      <button class="button" (click)="toggleLeaveModal()">Cancel</button>
     </footer>
   </div>
 </div>

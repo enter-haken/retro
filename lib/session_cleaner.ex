@@ -30,21 +30,9 @@ defmodule Retro.SessionCleaner do
           false
       end
     end)
-    |> Enum.map(fn {:ok, %Session{id: id}} -> id end)
-    |> Enum.each(fn id ->
-      case Supervisor.terminate_child(Retro.SessionSupervisor, id) do
-        {:error, _not_found} ->
-          Logger.warn("clould not terminate child for session #{id}.")
-
-        _ ->
-          Supervisor.delete_child(Retro.SessionSupervisor, id)
-          Logger.info("session #{id} has been terminated, after two hours of inactivity.")
-      end
-
-      if EventBus.topic_exist?(id |> String.to_atom()) do
-        EventBus.unsubscribe(id |> String.to_atom())
-        Logger.info("Topic #{id |> String.to_atom()} has been unsubscribed.")
-      end
+    |> Enum.each(fn {:ok, %Session{id: id} = session} ->
+      Logger.info("session #{id} has been terminated, after two hours of inactivity.")
+      Retro.SessionSupervisor.delete(session)
     end)
 
     Process.send_after(self(), :find_orphaned_sessions, @clean_up_time_in_seconds * 1_000)

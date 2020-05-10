@@ -34,6 +34,26 @@ defmodule Retro.SessionSupervisor do
     end
   end
 
+  def delete(%Session{id: id}) do
+    case __MODULE__
+         |> Supervisor.terminate_child(id) do
+      {:error, _not_found} ->
+        Logger.warn("clould not terminate child for session #{id}.")
+        {:error, :failed}
+
+      _ ->
+        Supervisor.delete_child(Retro.SessionSupervisor, id)
+        Logger.info("session #{id} has been terminated, after two hours of inactivity.")
+
+        if EventBus.topic_exist?(id |> String.to_atom()) do
+          EventBus.unsubscribe(id |> String.to_atom())
+          Logger.info("Topic #{id |> String.to_atom()} has been unsubscribed.")
+        end
+
+        {:ok, :terminated}
+    end
+  end
+
   def get_pid(id) do
     case any?(id) do
       true ->
@@ -57,5 +77,4 @@ defmodule Retro.SessionSupervisor do
     Supervisor.which_children(__MODULE__)
     |> Enum.any?(fn {session_id, _, _, _} -> session_id == id end)
   end
-
 end
