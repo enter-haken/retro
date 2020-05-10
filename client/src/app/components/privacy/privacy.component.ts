@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { TokenService } from '../../services/token.service';
+import { SessionService } from '../../services/session.service';
 
 @Component({
   selector: 'app-privacy',
@@ -28,6 +29,7 @@ export class PrivacyComponent implements OnInit {
 
   constructor(
     private tokenService: TokenService,
+    private sessionService: SessionService,
     private router: Router
   ) { }
 
@@ -36,7 +38,11 @@ export class PrivacyComponent implements OnInit {
 
   revokeCookieSettings() {
     this.tokenService.revokePermissionToSetCookies();
-    this.tokenService.logout();
+
+    if (this.tokenService.hasToken()) {
+      this.sessionService.deleteParticpant();
+    }
+
     this.router.navigate(['start']);
   }
 }

@@ -43,7 +43,7 @@ export class AppComponent implements OnInit {
   }
 
   toggleLeaveModal() {
-    this.modalLeaveIsActive = !this.modalLeaveIsActive; 
+    this.modalLeaveIsActive = !this.modalLeaveIsActive;
   }
 
   leave() {
@@ -61,17 +61,9 @@ export class AppComponent implements OnInit {
     this.modalStateYourNameIsActive = false;
   }
 
-  removeLocalData() {
-    this.tokenService.revokePermissionToSetCookies();
-    this.sessionService.deleteParticpant()
-
-    this.modalLeaveIsActive = false;
-
-    this.router.navigate(['start']);
-  }
-
   copyToClipboard(inputElement) {
     inputElement.select();
     document.execCommand('copy');
-    inputElement.setSelectionRange(0, 0);}
+    inputElement.setSelectionRange(0, 0);
+  }
 }
