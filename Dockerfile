@@ -6,7 +6,7 @@ WORKDIR /app
 # add `/app/node_modules/.bin` to $PATH
 ENV PATH /app/node_modules/.bin:$PATH
 
-RUN npm install -g @angular/cli@8.3.26
+RUN npm install -g @angular/cli@9.1.4
 
 # add app
 
