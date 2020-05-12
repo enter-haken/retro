@@ -21,6 +21,10 @@ deep_clean: clean
 run: install_node_modules_if_neccessary
 	ng serve --configuration=dev --host 0.0.0.0 --disableHostCheck=true
 
+.PHONY: loc
+loc:
+	find src -type f | while read line; do cat $$line; done | sed '/^\s*$$/d' | wc -l
+
 .PHONY: ignore
 ignore:
 	echo "#ignore file for silver searcher" > .ignore
@@ -28,4 +32,5 @@ ignore:
 	echo "#https://github.com/ggreer/the_silver_searcher/wiki/Advanced-Usage" >> .ignore
 	find dist/ >> .ignore | true
 	echo "node_modules/" >> .ignore
+
 

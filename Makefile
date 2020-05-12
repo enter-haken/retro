@@ -51,6 +51,10 @@ test: check_deps
 release: build
 	MIX_ENV=prod mix release
 
+.PHONY: loc
+loc:
+	find lib -type f | while read line; do cat $$line; done | sed '/^\s*$$/d' | wc -l
+
 .PHONY: docker
 docker: 
 	docker build -t ${IMG} .
