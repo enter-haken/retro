@@ -53,6 +53,7 @@ release: build
 
 .PHONY: loc
 loc:
+	make -C client loc
 	find lib -type f | while read line; do cat $$line; done | sed '/^\s*$$/d' | wc -l
 
 .PHONY: docker
