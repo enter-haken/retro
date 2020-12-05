@@ -6,7 +6,8 @@ defmodule Retro.SessionSupervisor do
   alias Retro.{Session, SessionWorker}
 
   def child_spec(_) do
-    Supervisor.Spec.supervisor(__MODULE__, [])
+    {Retro.SessionSupervisor, {Retro.SessionSupervisor, :start_link, []}, :permanent, :infinity,
+     :supervisor, [Retro.SessionSupervisor]}
   end
 
   def start_link() do

@@ -6,7 +6,7 @@ WORKDIR /app
 # add `/app/node_modules/.bin` to $PATH
 ENV PATH /app/node_modules/.bin:$PATH
 
-RUN npm install -g @angular/cli@9.1.4
+RUN npm install -g @angular/cli@11.0.3
 
 # add app
 
@@ -16,7 +16,7 @@ RUN make deep_clean build
 
 # backend builder
 
-FROM elixir:1.10.4 AS backend_builder
+FROM elixir:1.11.2 AS backend_builder
 
 WORKDIR /app
 
@@ -31,7 +31,7 @@ RUN make release
 
 # backend runner 
 
-FROM elixir:1.10.4-slim AS runner
+FROM elixir:1.11.2-slim AS runner
 
 WORKDIR /app
 

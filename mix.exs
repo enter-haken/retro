@@ -13,7 +13,11 @@ defmodule Retro.MixProject do
 
   def application do
     [
-      extra_applications: [:logger, :plug, :event_bus],
+      extra_applications: [
+        :logger,
+        :plug,
+        :event_bus
+      ],
       mod: {Retro.Application, []}
     ]
   end
