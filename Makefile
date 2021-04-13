@@ -1,9 +1,8 @@
-NAME := hake/retro
-TAG := $$(git log -1 --pretty=%H)
-IMG := ${NAME}:${TAG}
-LATEST := ${NAME}:latest
+VERSION := `cat VERSION`
+CURRENT := retro:${VERSION}
+DOCKERHUB_TARGET := enterhaken/retro:${VERSION}
+DOCKERHUB_TARGET_LATEST := enterhaken/retro:latest
 
-DOCKERHUB_TARGET := enterhaken/retro:latest
 
 .PHONY: default
 default: build
@@ -58,8 +57,7 @@ loc:
 
 .PHONY: docker
 docker: 
-	docker build -t ${IMG} .
-	docker tag ${IMG} ${LATEST}
+	docker build -t ${CURRENT} .
 
 .PHONY: docker_run
 docker_run:
@@ -67,12 +65,14 @@ docker_run:
 		-p 5053:4050 \
 		--name retro \
 		-d \
-		-t ${LATEST} 
+		-t retro:${VERSION}
 
 .PHONY: docker_push
 docker_push:
-	docker tag ${LATEST} ${DOCKERHUB_TARGET}
-	docker push ${DOCKERHUB_TARGET}
+	docker tag $(CURRENT) $(DOCKERHUB_TARGET) 
+	docker push $(DOCKERHUB_TARGET)
+	docker tag $(CURRENT) $(DOCKERHUB_TARGET_LATEST) 
+	docker push $(DOCKERHUB_TARGET_LATEST)
 	
 .PHONY: update
 update: docker
